@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  app:
+    restart: unless-stopped
+    container_name: amazon_connect_demo_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./storage/app:/var/www/html/storage/app
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+    ports:
+      - "8080:80"
+    networks:
+      - n-app
+
+networks:
+  n-app:
+    driver: bridge
